@@ -1,0 +1,48 @@
+{% extends "admin/index.html" %}
+{% load i18n %}
+
+{% block content %}
+    <h1>{% trans 'Site administration' %}</h1>
+
+    <div id="content-main">
+        {% for model, model_admin in app_list %}
+            <div class="app-{{ model|slugify }}">
+                <table>
+                <caption>
+                    <a href="{{ model_admin.admin_url }}">{{ model_admin.name }}</a>
+                </caption>
+                <tbody>
+                {% for related_object in model_admin.related_objects %}
+                    <tr>
+                        <th scope="row">
+                            <a href="{{ related_object.admin_url }}">{{ related_object.name }}</a>
+                        </th>
+                        <td>{{ related_object.object_count }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="content-shortcuts">
+        <h2>Shortcuts</h2>
+        <ul>
+            <li><a href="{% url 'admin:scrape-content' %}">Scrape Content</a></li>
+            <li><a href="{% url 'admin:thepopwinegdrives_book_changelist' %}">Manage Books</a></li>
+        </ul>
+
+        <h2>API Endpoints</h2>
+        <ul>
+            <li><a href="{% url 'book-list' %}">Books List</a></li>
+            <li><a href="{% url 'scrape-webpage' %}">Scrape Webpage</a></li>
+            <li><a href="{% url 'aggregated-content' %}">Aggregated Content</a></li>
+        </ul>
+
+        <!-- <h2>Script Management</h2>
+        <ul>
+            <li><a href="{% url 'admin:view-scripts' %}">View Scripts</a></li>
+        </ul> -->
+    </div>
+{% endblock %}

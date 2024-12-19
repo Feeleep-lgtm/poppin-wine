@@ -1,0 +1,12 @@
+<!-- templates/admin/index.html -->
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+{% if user.is_authenticated %}
+<h1>Shortcuts</h1>
+<ul>
+     <li><a href="{% url 'admin:fetch-books' %}">Fetch Books from Google Drive</a></li>
+    <li><a href="{% url 'admin:fetch-file-content' %}">Fetch File Content from Google Drive</a></li>
+</ul>
+{% endif %}
+{% endblock %}

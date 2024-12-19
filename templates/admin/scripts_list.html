@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<h1>{% trans "Scripts" %}</h1>
+<table>
+    <thead>
+        <tr>
+            <th>{% trans "Name" %}</th>
+            <th>{% trans "Is Running" %}</th>
+            <th>{% trans "Last Run" %}</th>
+            <th>{% trans "Actions" %}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for script in scripts %}
+        <tr>
+            <td>{{ script.name }}</td>
+            <td>{{ script.is_running }}</td>
+            <td>{{ script.last_run }}</td>
+            <td>
+                <form action="{% url 'admin:run-script' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="script_id" value="{{ script.id }}">
+                    <button type="submit" class="button">Run</button>
+                </form>
+                <form action="{% url 'admin:stop-script' %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="hidden" name="script_id" value="{{ script.id }}">
+                    <button type="submit" class="button">Stop</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

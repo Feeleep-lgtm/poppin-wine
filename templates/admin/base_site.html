@@ -1,0 +1,50 @@
+{% extends "admin/base_site.html" %}
+{% load static i18n %}
+{% block sidebar %}
+  {{ block.super }}
+  <div class="app-yourapp module">
+    <h2>{% trans "Shortcuts" %}</h2>
+    <ul class="nav nav-sidebar" id="nav-shortcuts">
+      <li>
+        <a href="{% url 'admin:scrape-content' %}">
+          {% trans "Scrape Content" %}
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'admin:thepopwinegdrives_book_changelist' %}">
+          {% trans "Manage Books" %}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="app-yourapp module">
+    <h2>{% trans "API Endpoints" %}</h2>
+    <ul class="nav nav-sidebar" id="nav-api-endpoints">
+      <li>
+        <a href="{% url 'book-list' %}">
+          {% trans "Books List" %}
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'scrape-webpage' %}">
+          {% trans "Scrape Webpage" %}
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'aggregated-content' %}">
+          {% trans "Aggregated Content" %}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- <div class="app-yourapp module">
+    <h2>{% trans "Script Management" %}</h2>
+    <ul class="nav nav-sidebar" id="nav-script-management">
+      <li>
+        <a href="{% url 'admin:view-scripts' %}">
+          {% trans "View Scripts" %}
+        </a>
+      </li>
+    </ul>
+  </div> -->
+{% endblock %}

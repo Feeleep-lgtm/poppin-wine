@@ -1,0 +1,9 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+<h1>Run Script</h1>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="button">Run</button>
+</form>
+{% endblock %}

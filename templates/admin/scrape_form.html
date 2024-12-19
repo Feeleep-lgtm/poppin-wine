@@ -1,0 +1,9 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+<h1>Scrape Content</h1>
+<form method="post">{% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="button">Scrape</button>
+</form>
+{% endblock %}

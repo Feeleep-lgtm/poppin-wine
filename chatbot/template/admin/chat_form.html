@@ -1,0 +1,18 @@
+<!-- chatbot/template/admin/chat_form.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Chat with the Bot</h1>
+  <div style="max-height: 400px; overflow-y: scroll; margin-bottom: 20px;">
+    {% for chat in chat_history %}
+      <p><strong>You:</strong> {{ chat.user_message }}</p>
+      <p><strong>Bot:</strong> {{ chat.bot_response }}</p>
+      <hr>
+    {% endfor %}
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+  </form>
+{% endblock %}

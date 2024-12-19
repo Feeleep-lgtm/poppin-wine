@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: PoppinWineBackend
+    runtime: python
+    repo: https://github.com/bidemi1986/PoppinWineBackend
+    plan: starter
+    region: oregon
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput && python manage.py migrate
+    startCommand: gunicorn PoppinBackend.wsgi:application --bind 0.0.0.0:10000
+    envVars:
+      - key: ENV
+        value: PRODUCTION
+      - key: SECRET_KEY
+        value: django-insecure-j*ka!h+9c@qm--6+13!jkg%8wm9&znlou^&4t0uml$4fkm6a#k
+      - key: DB_ENGINE
+        value: django.db.backends.postgresql
+      - key: DB_NAME
+        value: poppinwinedbqa
+      - key: DB_USER
+        value: poppinwinedbqa_user
+      - key: DB_PASSWORD
+        value: jLAw54dF1VM0wIX9pRf7D4PP7lLQdei0
+      - key: DB_HOST
+        value: dpg-cpvisouehbks73dunhr0-a.oregon-postgres.render.com
+      - key: DB_PORT
+        value: '5432'
+      - key: CELERY_BROKER_URL
+        value: redis://localhost:6379/0
+      - key: CELERY_RESULT_BACKEND
+        value: redis://localhost:6379/0
+      - key: GOOGLE_SERVICE_ACCOUNT_EMAIL
+        value: access-files@puzzle-dc7a6.iam.gserviceaccount.com
+      - key: GOOGLE_SERVICE_ACCOUNT_KEY
+        value: ./service-account-key.json  # Ensure this file is included in your repository or configured correctly
+version: "1"

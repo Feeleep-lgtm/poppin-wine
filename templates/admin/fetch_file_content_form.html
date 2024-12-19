@@ -1,0 +1,10 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block content %}
+<h1>Fetch File Content</h1>
+<form method="post">{% csrf_token %}
+  <p>{{ form.file_link.label_tag }} {{ form.file_link }}</p>
+  <p><strong>Service Account Email:</strong> <span style="color: gray;">{{ form.service_account_email }}</span></p>
+  <button type="submit" class="button">Fetch File Content</button>
+</form>
+{% endblock %}
